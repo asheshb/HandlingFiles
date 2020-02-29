@@ -12,38 +12,29 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         save_to_file.setOnClickListener {
-            writeToFile("data1.txt")
+            writeToFile("data.txt")
         }
 
         read_from_file.setOnClickListener {
-            readFromFile("data1.txt")
+            readFromFile("data.txt")
         }
     }
 
     private fun writeToFile(fileName: String){
-        val file = File(filesDir, fileName)
+        val file = File.createTempFile(fileName, null, cacheDir)
 
         val data = file_text.text.toString()
 
         file.writeText(data)
 
-//        file.writeBytes(data.toByteArray())
-
-//        file.bufferedWriter().use{ out->
-//            out.write(data)
-//        }
-
         file_text.setText("")
     }
 
     private fun readFromFile(fileName: String){
-        val file = File(filesDir, fileName)
 
-        file_text.setText(file.readText())
-
-//        file_text.setText(file.readBytes().toString(Charsets.UTF_8))
-
-//        file_text.setText(file.bufferedReader().readText())
-
+        val files = cacheDir.listFiles()
+        files?.forEach {
+            file_text.append("${it.name}\n")
+        }
     }
 }
