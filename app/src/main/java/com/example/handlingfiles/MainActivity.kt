@@ -28,6 +28,8 @@ class MainActivity : AppCompatActivity() {
         file.writeText(data)
 
         file_text.setText("")
+
+        //file_text.setText("Data written to file: ${file.name}")
     }
 
     private fun readFromFile(fileName: String){
