@@ -2,6 +2,7 @@ package com.example.handlingfiles
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Environment
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.File
 
@@ -21,7 +22,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun writeToFile(fileName: String){
-        val file = File.createTempFile(fileName, null, cacheDir)
+        val file = File(getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), fileName)
 
         val data = file_text.text.toString()
 
@@ -32,9 +33,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun readFromFile(fileName: String){
 
-        val files = cacheDir.listFiles()
-        files?.forEach {
-            file_text.append("${it.name}\n")
-        }
+        val file = File(getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), fileName)
+
+        file_text.setText(file.readText())
+
+
     }
 }
