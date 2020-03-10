@@ -12,11 +12,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         save_to_file.setOnClickListener {
-            writeToFile("data1.txt")
+            writeToFile("data.txt")
         }
 
         read_from_file.setOnClickListener {
-            readFromFile("data1.txt")
+            readFromFile("data.txt")
         }
     }
 
